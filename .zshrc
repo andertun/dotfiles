@@ -2,7 +2,7 @@
 
 export TERM=xterm-256color
 export CLICOLOR=1
-export LSCOLORS=Fafacxdxbxegedabagacad
+export LSCOLORS=exfxcxdxbxegedabagacad
 
 # PROMPT STUFF
 GREEN=$(tput setaf 2);
