@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 # ~/.macos — https://mths.be/macos
-# Modified by Kent C. Dodds
+# Modified by Kent C. Dodds and Harald Sigh Andertun
 # Run without downloading:
-# curl https://raw.githubusercontent.com/kentcdodds/dotfiles/HEAD/.macos | bash
+# curl https://raw.githubusercontent.com/andertun/dotfiles/HEAD/.macos | bash
 
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
@@ -16,7 +16,7 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 ###############################################################################
-# Kent's Customizations                                                       #
+# Harald's Customizations                                                     #
 ###############################################################################
 
 echo "Hello $(whoami)! Let's get you set up."
@@ -28,22 +28,18 @@ echo "installing homebrew"
 # install homebrew https://brew.sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/kentcdodds/.zprofile
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/harald/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 echo "brew installing stuff"
 # hub: a github-specific version of git
-# libdvdcss: makes handbreak capable of ripping DVDs
 # ripgrep: rg is faster than alternatives
-# imagemagick: eventually I will need this for something
-# ffmpeg: eventually I'll need this for something
 # tree: really handy for listing out directories in text
 # bat: A cat(1) clone with syntax highlighting and Git integration.
 # delta: A fantastic diff tool
 # switchaudio-osx: allows me to switch the audio device via the command line
-# pgcli: postgres CLI
-brew install git hub libdvdcss ripgrep imagemagick watchman tree bat \
-git-delta switchaudio-osx pgcli ffmpeg
+brew install git hub ripgrep watchman tree bat \
+git-delta switchaudio-osx
 
 echo "installing node (via n-install)"
 curl -L https://git.io/n-install | bash
@@ -52,19 +48,17 @@ echo "node --version: $(node --version)"
 echo "npm --version: $(npm --version)"
 
 echo "installing a few global npm packages"
-npm install --global serve fkill-cli npm-quick-run \
-semantic-release-cli npm-check-updates
+npm install --global serve fkill-cli npm-check-updates
 
 echo "installing apps with brew --cask"
-brew install --cask alfred google-chrome firefox brave-browser bettertouchtool divvy \
-bartender itsycal visual-studio-code 1password dash screenflow skype workflowy \
-sublime-text vlc discord obs handbrake zoom betterzip avibrazil-rdm sip \
+brew install --cask google-chrome firefox \
+itsycal visual-studio-code 1password dash \
+vlc discord obs zoom \
 qlcolorcode qlmarkdown qlstephen quicklook-json webpquicklook \
-suspicious-package qlvideo spotify focus dropbox front slack openaudible \
-todoist audacity docker another-redis-desktop-manager loopback kid3
+qlvideo spotify dropbox slack docker
 
 echo "Generating a new SSH key for GitHub"
-ssh-keygen -t ed25519 -C "me+github@kentcdodds.com" -f ~/.ssh/id_ed25519
+ssh-keygen -t ed25519 -C "harald.andertun+github@gmail.com" -f ~/.ssh/id_ed25519
 eval "$(ssh-agent -s)"
 touch ~/.ssh/config
 echo "Host *\n AddKeysToAgent yes\n UseKeychain yes\n IdentityFile ~/.ssh/id_ed25519" | tee ~/.ssh/config
@@ -72,7 +66,7 @@ ssh-add -K ~/.ssh/id_ed25519
 echo "run 'pbcopy < ~/.ssh/id_ed25519.pub' and paste that into GitHub"
 
 echo "cloning dotfiles"
-git clone git@github.com:kentcdodds/dotfiles.git "${HOME}/dotfiles"
+git clone git@github.com:andertun/dotfiles.git "${HOME}/dotfiles"
 ln -s "${HOME}/dotfiles/.zshrc" "${HOME}/.zshrc"
 ln -s "${HOME}/dotfiles/.gitignore_global" "${HOME}/.gitignore_global"
 ln -s "${HOME}/dotfiles/.gitconfig" "${HOME}/.gitconfig"
@@ -126,7 +120,7 @@ sudo nvram SystemAudioVolume=" "
 
 # Disable smooth scrolling
 # (Uncomment if you’re on an older Mac that messes up the animation)
-#defaults write NSGlobalDomain NSScrollAnimationEnabled -bool false
+# defaults write NSGlobalDomain NSScrollAnimationEnabled -bool false
 
 # Increase window resize speed for Cocoa applications
 # defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
@@ -170,7 +164,7 @@ defaults write com.apple.helpviewer DevMode -bool true
 # Fix for the ancient UTF-8 bug in QuickLook (https://mths.be/bbo)
 # Commented out, as this is known to cause problems in various Adobe apps :(
 # See https://github.com/mathiasbynens/dotfiles/issues/237
-#echo "0x08000100:0" > ~/.CFUserTextEncoding
+# echo "0x08000100:0" > ~/.CFUserTextEncoding
 
 # Reveal IP address, hostname, OS version, etc. when clicking the clock
 # in the login window
@@ -277,7 +271,7 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 10
 # sudo systemsetup -settimezone "Europe/Brussels" > /dev/null
 
 # Stop iTunes from responding to the keyboard media keys
-#launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
+# launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
 
 ###############################################################################
 # Screen                                                                      #
@@ -288,7 +282,7 @@ defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # Save screenshots to the desktop
-defaults write com.apple.screencapture location -string "${HOME}/Desktop"
+defaults write com.apple.screencapture location -string "${HOME}/Desktop/screenshots"
 
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
 defaults write com.apple.screencapture type -string "png"
@@ -325,7 +319,7 @@ defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
 # Finder: show hidden files by default
-#defaults write com.apple.finder AppleShowAllFiles -bool true
+defaults write com.apple.finder AppleShowAllFiles -bool true
 
 # Finder: show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
@@ -489,9 +483,9 @@ defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
 # sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator (Watch).app" "/Applications/Simulator (Watch).app"
 
 # Add a spacer to the left side of the Dock (where the applications are)
-#defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
+# defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
 # Add a spacer to the right side of the Dock (where the Trash is)
-#defaults write com.apple.dock persistent-others -array-add '{tile-data={}; tile-type="spacer-tile";}'
+# defaults write com.apple.dock persistent-others -array-add '{tile-data={}; tile-type="spacer-tile";}'
 
 # Hot corners
 # Possible values:
@@ -835,7 +829,7 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 ###############################################################################
 
 # Disable automatic emoji substitution (i.e. use plain text smileys)
-defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticEmojiSubstitutionEnablediMessage" -bool false
+# defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticEmojiSubstitutionEnablediMessage" -bool false
 
 # Disable smart quotes as it’s annoying for messages that contain code
 defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticQuoteSubstitutionEnabled" -bool false
