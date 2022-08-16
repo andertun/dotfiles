@@ -84,13 +84,13 @@ export N_PREFIX="$HOME/n"; [[ :$PATH: == *"$N_PREFIX/bin"* ]] || PATH="$N_PREFIX
 PATH="$PATH:$HOME/.kenv/bin:$HOME/.kit/bin";
 
 # fly manual install
-PATH="$HOME/.fly/bin:$PATH";
+# PATH="$HOME/.fly/bin:$PATH";
 
 # CDPATH ALTERATIONS
-CDPATH=.:$HOME:$HOME/code:$HOME/code/epic-react:$HOME/code/testingjavascript:$HOME/Desktop
+CDPATH=.:$HOME:$HOME/code:$HOME/Desktop
 
 # disable https://scarf.sh/
-SCARF_ANALYTICS=false
+# SCARF_ANALYTICS=false
 
 # Custom Aliases
 alias code="\"/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code\""
@@ -107,11 +107,6 @@ alias d="cd ~/code";
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 alias deleteDSFiles="find . -name '.DS_Store' -type f -delete"
-alias kcd-oss="npx -p yo -p generator-kcd-oss -c 'yo kcd-oss'";
-function rmx {
-  cp -R ~/.rmx "$@";
-  cd "$@";
-}
 alias npm-update="npx npm-check-updates --dep prod,dev --upgrade";
 alias yarn-update="yarn upgrade-interactive --latest";
 alias flushdns="sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder"
@@ -168,11 +163,6 @@ function quit () {
     osascript -e 'quit app "'$appname'"'
     done
   fi
-}
-
-gif() {
-  ffmpeg -i "$1" -vf "fps=25,scale=iw/2:ih/2:flags=lanczos,palettegen" -y "/tmp/palette.png"
-  ffmpeg -i "$1" -i "/tmp/palette.png" -lavfi "fps=25,scale=iw/2:ih/2:flags=lanczos [x]; [x][1:v] paletteuse" -f image2pipe -vcodec ppm - | convert -delay 4 -layers Optimize -loop 0 - "${1%.*}.gif"
 }
 
 # zsh auto autocomplete
