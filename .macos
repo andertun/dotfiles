@@ -55,7 +55,7 @@ brew install --cask google-chrome firefox \
 itsycal visual-studio-code 1password dash \
 vlc discord obs zoom \
 qlcolorcode qlmarkdown qlstephen quicklook-json webpquicklook \
-qlvideo spotify dropbox slack docker tower
+qlvideo spotify dropbox slack docker tower krisp
 
 echo "Generating a new SSH key for GitHub"
 ssh-keygen -t ed25519 -C "harald.andertun@gmail.com" -f ~/.ssh/id_ed25519
