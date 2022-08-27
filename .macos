@@ -39,7 +39,7 @@ echo "brew installing stuff"
 # delta: A fantastic diff tool
 # switchaudio-osx: allows me to switch the audio device via the command line
 brew install git hub ripgrep watchman tree bat \
-git-delta switchaudio-osx
+git-delta switchaudio-osx jq
 
 echo "installing node (via n-install)"
 curl -L https://git.io/n-install | bash
