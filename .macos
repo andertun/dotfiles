@@ -56,7 +56,7 @@ itsycal visual-studio-code 1password dash \
 vlc discord obs zoom \
 qlcolorcode qlmarkdown qlstephen quicklook-json webpquicklook \
 qlvideo spotify dropbox slack docker tower krisp notion figma messenger \
-fig grammarly warp gpg-suite docker
+fig grammarly warp gpg-suite
 
 # Remove the quarantine flag from an unnotarized QuickLook plugin
 # https://hargitai.co.nz/quicklook-plugin-qlgenerator-cant-be-opened-because-apple-cannot-check-it-for-malicious-software-fix-locally/
