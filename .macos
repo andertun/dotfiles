@@ -89,7 +89,8 @@ grammarly \
 warp \
 gpg-suite \
 loopback \
-arc
+arc \
+raycast
 
 echo "Generating a new SSH key for GitHub"
 ssh-keygen -t ed25519 -C "harald.andertun@gmail.com" -f ~/.ssh/id_ed25519
